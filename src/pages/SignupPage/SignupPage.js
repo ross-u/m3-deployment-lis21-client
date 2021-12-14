@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import authService from "../../services/auth.service";
+// import authService from "../../services/auth.service";
 
 function SignupPage(props) {
   const [email, setEmail] = useState("");
@@ -22,17 +22,14 @@ function SignupPage(props) {
       // Create an object representing the request body
       const requestBody = { email, password, name };
 
-      const authToken = localStorage.getItem('authToken');
-      await axios.post(
-        'http://localhost:5005/auth/signup',
-        requestBody,
-        { headers: { Authorization: `Bearer ${authToken}`} }
-      )
+      const authToken = localStorage.getItem("authToken");
+      await axios.post("http://localhost:5005/auth/signup", requestBody, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       // or with a service
       // await authService.signup(requestBody);
 
-      
       // If the request is successful navigate to login page
       navigate("/login");
     } catch (error) {
