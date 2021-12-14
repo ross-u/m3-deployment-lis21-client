@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { createContext, useState, useEffect } from "react";
-// import authService from "../services/auth.service";
+import authService from "../services/auth.service";
 
 const AuthContext = createContext();
 
@@ -16,12 +16,13 @@ function AuthProviderWrapper({ children }) {
       const storedToken = localStorage.getItem("authToken");
 
       if (storedToken) {
-        const response = await axios.get("http://localhost:5005/auth/verify", {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        });
+        // const response = await axios.get(
+        //   `${process.env.REACT_APP_SERVER_URL}/auth/verify`,
+        //   { headers: { Authorization: `Bearer ${storedToken}` } }
+        // );
 
         // or with a service
-        // const response = await authService.verify();
+        const response = await authService.verify();
 
         // If the token is valid, update the state variables
         const user = response.data; // coming from payload
